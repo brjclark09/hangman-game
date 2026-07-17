@@ -20,10 +20,11 @@
   </thead>
   <tbody>
     @for (game of games(); track game.id) {
-      <tr class="border-b border-gray-100">
-        <td class="px-4 py-4">
-          <a [routerLink]="['/wordgame', game.id]" class="text-blue-600 hover:underline">{{ game.id }}</a>
-        </td>
+      <tr
+        (click)="playGame(game.id)"
+        class="border-b border-gray-100"
+      >
+        <td class="px-4 py-4">{{ game.id }}</td>
         <td class="px-4 py-4 font-mono tracking-widest">{{ spaced(game.view) }}</td>
         <td class="px-4 py-4 text-gray-800">{{ game.remainingGuesses }}</td>
         <td class="px-4 py-4 font-mono tracking-widest text-gray-800">
@@ -40,7 +41,7 @@
         </td>
         <td class="px-4 py-4 text-right">
           <button
-            (click)="deleteGame(game.id)"
+            (click)="deleteGame(game.id, $event)"
             class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-1.5 rounded transition-colors"
           >
             Delete
